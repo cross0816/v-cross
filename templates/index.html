@@ -1,40 +1,42 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Task Master</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="The future">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Cross</title>
+</head>
 {% endblock %}
 
 {% block body %}
+
 <div class="content">
-    <h1 style="text-align: center">Task Master</h1>
-    {% if tasks|length < 1 %}
-    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
-    {% else %}
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+
+    <h1>Hello Everyone, Welcome to the start of something great!</h1>
+    <hr/>
+    <a href="Carlos.png" target="_blank">Carlos's homepage</a>
+    <p>Go Buffalo Bills</p>
 
     <div class="form">
         <form action="/" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Add Task">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName"><br><br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName"><br><br>
+            <!-- <label for="dob">DOB:</label>
+            <input type="date" id="dob" name="dob"><br><br> -->
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber"><br><br>
+            <label for="username">Username:</label>
+            <input type="username" id="username" name="username"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="Submit">
         </form>
     </div>
+
 </div>
 {% endblock %}

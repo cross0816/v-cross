@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="The future">
+    <title>V-Cross</title>
+  </head>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <body style="background-color:bisque;">
+        <label>First Name: {{user.firstName}}</label>
+        <br/>
+        <label>LastName: {{user.lastName}}</label>
+        <br/>
+        <label>Email: {{user.email}}</label>
+        <br/>
+        <label>Phone Number: {{user.phoneNumber}}</label>
+        <br/>
+        <label>Username: {{user.username}}</label>
+        <br/>
+        <p>Facebook</p>
+        <input type="text">
+        <p>Twitter</p>
+        <input type="text">
+        <p>instagram</p>
+        <input type="text">
+        <p>Linkden</p>
+        <input type="text">
+        <br/>
+        <label><strong>Go Nets</strong></label>
+    </body>
+</div>
+{% endblock %}

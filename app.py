@@ -6,32 +6,46 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-class Todo(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    firstName = db.Column(db.String(200), nullable=False)
+    lastName = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
+    phoneNumber = db.Column(db.String(200), nullable=False)
+    username = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        return '<Task %r>' % self.id
-
+        return '<User %r>' % self.id
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
+        firstName = request.form['firstName']
+        lastName = request.form['lastName']
+        email = request.form['email']
+        phoneNumber = request.form['phoneNumber']
+        username = request.form['username']
+        password = request.form['password']
+
+        new_user = User(firstName=firstName, lastName=lastName, email=email, phoneNumber=phoneNumber, username=username, password=password)
 
         try:
-            db.session.add(new_task)
+            db.session.add(new_user)
             db.session.commit()
-            return redirect('/')
+            users = User.query.all()
+            return render_template('page4.html', user=new_user, users=users)
         except:
             return 'There was an issue adding your task'
 
     else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
+        users = User.query.all()
+        return render_template('index.html', users=users)
 
+@app.route('/getUser/<int:id>',  methods=['GET'])
+def getUser(id):
+    user = User.query.get_or_404(id)
+    return render_template('page4.html', user=user)
 
 @app.route('/delete/<int:id>')
 def delete(id):
